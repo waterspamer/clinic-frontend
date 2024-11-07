@@ -1,17 +1,52 @@
 /* css/styles.css */
 
-/* Сброс стилей */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Существующие стили */
+
+/* Стили для экрана авторизации */
+.auth-view {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
   }
   
-  /* Основные стили */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+  .auth-view h2 {
+    text-align: center;
+    margin-bottom: 20px;
   }
   
-  /* Другие общие стили */
+  .auth-view form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-view label {
+    margin-bottom: 5px;
+  }
+  
+  .auth-view input {
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  .auth-view .btn {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .auth-view .btn-link {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: flex-start;
+  }
+  
+  #auth-message {
+    margin-top: 15px;
+    color: red;
+  }
   

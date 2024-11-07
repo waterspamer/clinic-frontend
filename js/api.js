@@ -1,20 +1,38 @@
 // js/api.js
+
 const API_BASE_URL = 'https://your-backend-api.com/api';
 
-export async function fetchDoctors() {
-  const response = await fetch(`${API_BASE_URL}/doctors`);
+export async function sendVerificationCode(phoneNumber) {
+  const response = await fetch(`${API_BASE_URL}/auth/request-code`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ phone_number: phoneNumber })
+  });
+
   if (!response.ok) {
-    throw new Error('Ошибка при загрузке списка специалистов');
+    throw new Error('Ошибка при отправке СМС-кода');
   }
+
   return await response.json();
 }
 
-export async function fetchDoctorDetails(id) {
-  const response = await fetch(`${API_BASE_URL}/doctors/${id}`);
+export async function verifyCode(phoneNumber, code) {
+  const response = await fetch(`${API_BASE_URL}/auth/verify-code`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ phone_number: phoneNumber, code: code })
+  });
+
   if (!response.ok) {
-    throw new Error('Ошибка при загрузке данных специалиста');
+    throw new Error('Неверный СМС-код');
   }
-  return await response.json();
+
+  const data = await response.json();
+  return data.user; // Предполагается, что API возвращает объект пользователя
 }
 
-// Другие функции API
+// Существующие функции API

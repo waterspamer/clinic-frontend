@@ -1,13 +1,21 @@
 // js/router.js
+
 import { renderMainMenu } from './views/mainMenuView.js';
 import { renderDoctorList } from './views/doctorListView.js';
 import { renderDoctorDetails } from './views/doctorDetailsView.js';
 // Импорт других представлений
+import { state } from './state.js';
 
 export function router() {
-  const hash = window.location.hash || '#menu';
+  const hash = window.location.hash;
 
-  if (hash === '#menu') {
+  if (!state.currentUser) {
+    // Если пользователь не авторизован, перенаправляем на экран авторизации
+    window.location.hash = '';
+    return;
+  }
+
+  if (hash === '#menu' || hash === '') {
     renderMainMenu();
   } else if (hash === '#doctors') {
     renderDoctorList();
@@ -19,7 +27,7 @@ export function router() {
   }
   // Обработка других маршрутов
   else {
-    // Если маршрут не найден, вернуть на главное меню или показать 404
+    // Если маршрут не найден, вернуть на главное меню
     renderMainMenu();
   }
 }
